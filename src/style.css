@@ -1,4 +1,96 @@
 /* Resets browsers' default styles and provides utility classes */
 @import 'tailwindcss';
+@import url('./assets/fonts/Quicksand/Quicksand-VariableFont_wght.ttf');
 
-@source "./";
+@theme {
+    /* Tailwind will create the new theme variable "--font-quicksand" 
+    and utility class called "font-quicksand" for us. */
+    --font-quicksand: 'Quicksand', serif;
+
+    --animate-wavey: wavey 1s linear infinite;
+
+    @keyframes wavey {
+        0%,
+        100% {
+            transform: scaleY(0.5);
+        }
+
+        50% {
+            transform: scaleY(1.5);
+        }
+    }
+
+    /* Variables for specifying animation delays */
+    --animation-delay-100: 100ms;
+    --animation-delay-200: 200ms;
+    --animation-delay-300: 300ms;
+    --animation-delay-400: 400ms;
+    --animation-delay-500: 500ms;
+    --animation-delay-600: 600ms;
+    --animation-delay-700: 700ms;
+    --animation-delay-800: 800ms;
+    --animation-delay-900: 900ms;
+    --animation-delay-1000: 1000ms;
+}
+
+/* This is a completely customized utility class
+that doesn't come with Tailwind. */
+@utility animation-delay-* {
+    animation-delay: --value(--animation-delay- *);
+    /* Allows you to specify .animation-delay-[<delay>] */
+    /* The asterisk means accepting any types of data. */
+    animation-delay: --value([ *]);
+}
+
+@layer base {
+    body {
+        font-family: var(--font-quicksand);
+    }
+
+    h1 {
+        @apply text-6xl font-bold;
+    }
+    h2 {
+        @apply text-5xl font-bold;
+    }
+    h3 {
+        @apply text-4xl font-bold;
+    }
+    h4 {
+        @apply text-3xl font-bold;
+    }
+    h5 {
+        @apply text-2xl font-bold;
+    }
+    h6 {
+        @apply text-xl font-bold;
+    }
+}
+
+@layer components {
+    /* Creating too many Tailwind components will increase bundle size.
+    You should prefer React components over Tailwind components. */
+    .menu-item {
+        @apply relative h-full flex items-center p-4 cursor-pointer font-bold text-xl text-pink-200 hover:text-zinc-200 hover:bg-white/10 transition-colors ease-in-out;
+    }
+}
+
+/* Tailwind will create a .group-open class. */
+@custom-variant group-open {
+    /* This custom variant can be applied to any descendants of .group elements.
+    .group-open:<utility class> will be applied when .group elements also have
+    .open class applied, use 'open' attribute, or are in :popover-open or :open state.
+    */
+    &:is(:where(.group):is(.open, [open], :popover-open, :open) *) {
+        /* With this directive, you can use .group-open:<utility class> */
+        @slot;
+    }
+}
+
+@custom-variant peer-open {
+    &:is(:where(.peer):is(.open, [open], :popover-open, :open) ~ *) {
+        @slot;
+    }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));

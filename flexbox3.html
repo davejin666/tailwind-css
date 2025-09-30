@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nested flexbox</title>
+        <link rel="stylesheet" href="/src/style.css" />
+    </head>
+    <body>
+        <header
+            class="flex top-0 h-15 justify-center items-center bg-purple-600"
+        >
+            <h1 class="font-bold text-2xl text-center text-zinc-100">
+                Complex flexbox example
+            </h1>
+        </header>
+        <section class="flex">
+            <article class="flex-[1_100px] p-2.5 m-2.5 bg-cyan-300">
+                <h2 class="font-bold text-2xl">First article</h2>
+                <p>Contents...</p>
+            </article>
+            <article class="flex-[1_100px] p-2.5 m-2.5 bg-cyan-300">
+                <h2 class="font-bold text-2xl">Second article</h2>
+                <p>Contents...</p>
+            </article>
+            <article
+                class="flex flex-col flex-wrap flex-[3_100px] p-2.5 m-2.5 bg-cyan-300"
+            >
+                <div class="flex justify-around items-center flex-[1_100px]">
+                    <button class="m-2 p-1 flex-[1_auto] bg-amber-300">
+                        Smile
+                    </button>
+                    <button class="m-2 p-1 flex-[1_auto] bg-amber-300">
+                        Laugh
+                    </button>
+                    <button class="m-2 p-1 flex-[1_auto] bg-amber-300">
+                        Wink
+                    </button>
+                    <button class="m-2 p-1 flex-[1_auto] bg-amber-300">
+                        Shrug
+                    </button>
+                    <button class="m-2 p-1 flex-[1_auto] bg-amber-300">
+                        Blush
+                    </button>
+                </div>
+                <div></div>
+                <div></div>
+            </article>
+        </section>
+    </body>
+</html>
