@@ -21,25 +21,23 @@
     }
 
     /* Variables for specifying animation delays */
-    --animation-delay-100: 100ms;
-    --animation-delay-200: 200ms;
-    --animation-delay-300: 300ms;
-    --animation-delay-400: 400ms;
-    --animation-delay-500: 500ms;
-    --animation-delay-600: 600ms;
-    --animation-delay-700: 700ms;
-    --animation-delay-800: 800ms;
-    --animation-delay-900: 900ms;
-    --animation-delay-1000: 1000ms;
+    --animation-delay-sm: 100ms;
+    --animation-delay-md: 500ms;
+    --animation-delay-lg: 1000ms;
 }
 
 /* This is a completely customized utility class
 that doesn't come with Tailwind. */
 @utility animation-delay-* {
+    /* Caters for animation-delay-sm -md -lg etc. */
     animation-delay: --value(--animation-delay- *);
+
     /* Allows you to specify .animation-delay-[<delay>] */
     /* The asterisk means accepting any types of data. */
-    animation-delay: --value([ *]);
+    /* animation-delay: --value([ *]); */
+
+    /* Newer way of specifying .animation-delay-[<delay>] classes available in V4. */
+    animation-delay: calc(--value(integer) * 1ms);
 }
 
 @layer base {
@@ -93,4 +91,26 @@ that doesn't come with Tailwind. */
     }
 }
 
+/* Allows for manual toggle between dark and light modes. */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Customize .container class to implement a fixed-width container
+ depending on screen size, minimizing fluid layout and increasing predictability. */
+.container {
+    width: 100%;
+    @media (width >= 40rem /* 640px */) {
+        max-width: 40rem /* 640px */;
+    }
+    @media (width >= 48rem /* 768px */) {
+        max-width: 48rem /* 768px */;
+    }
+    @media (width >= 64rem /* 1024px */) {
+        max-width: 64rem /* 1024px */;
+    }
+    @media (width >= 80rem /* 1280px */) {
+        max-width: 80rem /* 1280px */;
+    }
+    @media (width >= 96rem /* 1536px */) {
+        max-width: 96rem /* 1536px */;
+    }
+}
